@@ -1,0 +1,18 @@
+# Eclipse / IDEs
+.settings/
+.classpath
+.project
+.idea/
+*.iml
+.vscode/
+
+# Maven
+target/
+
+# Java / compilados
+*.class
+*.log
+
+# SO
+.DS_Store
+Thumbs.db
