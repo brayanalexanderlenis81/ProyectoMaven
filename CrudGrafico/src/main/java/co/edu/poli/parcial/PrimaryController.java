@@ -38,9 +38,6 @@ public class PrimaryController implements Initializable {
     @FXML
     private TableColumn<ObradeArte, String> colArtista;
 
-    // -----------------------------
-    //      FORMULARIO
-    // -----------------------------
     @FXML
     private TextField txtCodigo;
     @FXML
@@ -58,22 +55,14 @@ public class PrimaryController implements Initializable {
     @FXML
     private TextField txtExtra;
 
-    // -----------------------------
-    //      DETALLE
-    // -----------------------------
     @FXML
     private TextArea txtDetalle;
 
-    // -----------------------------
-    //      LÓGICA DEL NEGOCIO
-    // -----------------------------
     private ImplementacionOperacionCRUD gestor;
     private ObservableList<ObradeArte> listaObservable;
     private ObservableList<Artista> listaArtistas;
 
-    // ============================================================
-    //                     INICIALIZACIÓN
-    // ============================================================
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Gestor con tamaño 50 como en la consola
@@ -137,14 +126,10 @@ public class PrimaryController implements Initializable {
             }
         });
 
-        // IMPORTANTE:
-        // No llamamos actualizarTabla() aquí.
-        // La tabla solo se llena cuando el usuario presiona "Listar obras".
+
     }
 
-    // ============================================================
-    //                  MANEJO DE BOTONES
-    // ============================================================
+
 
     @FXML
     private void handleCrear() {
@@ -155,8 +140,7 @@ public class PrimaryController implements Initializable {
 
         String mensaje = gestor.create(nueva);
         mostrarAlerta(AlertType.INFORMATION, "Crear obra", mensaje);
-        // NO actualizamos la tabla aquí, igual que en consola.
-        // La tabla se llena/actualiza solo con el botón "Listar obras".
+
         limpiarFormulario();
     }
 
@@ -191,8 +175,7 @@ public class PrimaryController implements Initializable {
         String mensaje = gestor.update(seleccionada);
         mostrarAlerta(AlertType.INFORMATION, "Actualizar obra", mensaje);
 
-        // Aquí sí refrescamos la tabla porque ya hay una lista mostrada
-        // y estamos modificando una obra seleccionada.
+
         tablaObras.refresh();
         txtDetalle.setText(seleccionada.mostrarInformacionCompleta());
     }
@@ -210,10 +193,7 @@ public class PrimaryController implements Initializable {
         String mensaje = gestor.delete(codigo);
         mostrarAlerta(AlertType.INFORMATION, "Eliminar obra", mensaje);
 
-        // No llamamos actualizarTabla() aquí para mantener la idea
-        // de que el botón "Listar obras" es el que muestra la colección.
-        // Opcional: también podríamos removerla de la listaObservable:
-        // listaObservable.remove(seleccionada);
+
 
         limpiarFormulario();
         txtDetalle.clear();
@@ -242,7 +222,6 @@ public class PrimaryController implements Initializable {
             return;
         }
         gestor.cargarObras(cargadas);
-        // No actualizamos tabla automáticamente.
         mostrarAlerta(AlertType.INFORMATION, "Cargar colección",
                 "Colección cargada correctamente. Usa 'Listar obras' para verlas.");
     }
@@ -265,9 +244,7 @@ public class PrimaryController implements Initializable {
         txtDetalle.setText(seleccionada.mostrarInformacionCompleta());
     }
 
-    // ============================================================
-    //                  MÉTODOS DE APOYO
-    // ============================================================
+
 
     private ObradeArte construirObraDesdeFormulario() {
         String codigo = txtCodigo.getText();
