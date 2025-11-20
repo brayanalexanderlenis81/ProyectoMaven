@@ -24,9 +24,6 @@ import javafx.scene.control.Alert.AlertType;
 
 public class PrimaryController implements Initializable {
 
-    // -----------------------------
-    //      COMPONENTES DE TABLA
-    // -----------------------------
     @FXML
     private TableView<ObradeArte> tablaObras;
     @FXML
@@ -65,7 +62,7 @@ public class PrimaryController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Gestor con tamaño 50 como en la consola
+
         gestor = new ImplementacionOperacionCRUD(50);
 
         // Artistas predefinidos (mismos de Principal.java en consola)
@@ -90,7 +87,6 @@ public class PrimaryController implements Initializable {
             }
         });
 
-        // Configurar columnas de la tabla
         colCodigo.setCellValueFactory(cell ->
                 new SimpleStringProperty(cell.getValue().getCodigo()));
 
@@ -114,11 +110,10 @@ public class PrimaryController implements Initializable {
             return new SimpleStringProperty(nombre);
         });
 
-        // Lista observable para la tabla
         listaObservable = FXCollections.observableArrayList();
         tablaObras.setItems(listaObservable);
 
-        // Cuando se selecciona una obra en la tabla, se carga en el formulario
+
         tablaObras.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
                 cargarFormularioDesdeObra(newSel);
@@ -128,7 +123,6 @@ public class PrimaryController implements Initializable {
 
 
     }
-
 
 
     @FXML
